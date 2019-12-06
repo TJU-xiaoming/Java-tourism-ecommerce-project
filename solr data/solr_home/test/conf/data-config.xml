@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>    
+<dataConfig>  
+ <dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver"    
+   url="jdbc:mysql://192.168.9.62:3306/itripdb"    
+   user="root"    
+   password="root"/>  
+   <document name="common">  
+   
+      <entity name="areaDic" pk="id" query="SELECT id,`name`,areaNo,parent,isActivated FROM itrip_area_dic"
+	 
+	  deltaImportQuery="SELECT id,`name`,areaNo,parent,isActivated FROM itrip_area_dic where id ='${dih.delta.id}'" 
+	  
+	  deltaQuery="SELECT id,`name`,areaNo,parent,isActivated FROM itrip_area_dic where modifyDate > '${dih.last_index_time}'">    
+          <field column="id" name="id" />    
+          <field column="name" name="name" />    
+          <field column="areaNo" name="areaNo" />
+      </entity>
+	  
+ </document>   
+</dataConfig> 

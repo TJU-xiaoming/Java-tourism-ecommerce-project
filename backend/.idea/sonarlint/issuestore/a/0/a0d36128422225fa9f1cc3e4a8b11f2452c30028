@@ -1,0 +1,17 @@
+
+Nsquid:S1854Ë"7Remove this useless assignment to local variable "dto".(Ø®œ
+Nsquid:S1854«"7Remove this useless assignment to local variable "dto".(Ø®œ
+@squid:S1148›"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148İ"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148ü"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+wsquid:S1192Ş"ZDefine a constant instead of duplicating this literal "ç³»ç»Ÿå¼‚å¸¸,è·å–å¤±è´¥" 3 times.(÷¦£öıÿÿÿÿ
+qsquid:S2293¯"YReplace the type specification in this constructor call with the diamond operator ("<>").(¶÷§ˆ
+?squid:S1148m"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+rsquid:S1192Ú"UDefine a constant instead of duplicating this literal "é…’åº—idä¸èƒ½ä¸ºç©º" 5 times.(ªÒëôøÿÿÿÿ
+Xsquid:CallToDeprecatedMethod4"0Remove this use of "basePath"; it is deprecated.(Úºõ…
+@squid:S1148Ó"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148¶"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+psquid:S2293«"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ø®œ
+psquid:S2293Ë"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ø®œ
+@squid:S1148™"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148¾"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ

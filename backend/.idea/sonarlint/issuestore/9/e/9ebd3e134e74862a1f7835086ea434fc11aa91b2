@@ -1,0 +1,7 @@
+
+usquid:S2293$"YReplace the type specification in this constructor call with the diamond operator ("<>").(÷åøòıÿÿÿÿ
+gsquid:S2153:"KRemove the boxing to "Character"; The argument is already of the same type.(­Å­´şÿÿÿÿ
+=squid:S2131:"!Use "Character.toString" instead.(­Å­´şÿÿÿÿ
+squid:S1158:"€Call the static method Character.toString(...) instead of instantiating a temporary object to perform this to string conversion.(­Å­´şÿÿÿÿ
+?squid:S21290"#Remove this "Character" constructor(»£õÄüÿÿÿÿ
+?squid:S2129:"#Remove this "Character" constructor(­Å­´şÿÿÿÿ

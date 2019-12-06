@@ -1,0 +1,10 @@
+
+psquid:S2293C"YReplace the type specification in this constructor call with the diamond operator ("<>").(¶÷§ˆ
+nsquid:S3776\"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(¢Ş†§ùÿÿÿÿ
+6squid:S2129˜"Remove this "Long" constructor(Ú¢ˆ·
+@squid:S1148›"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+@squid:S1148‰"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+csquid:S1192a"GDefine a constant instead of duplicating this literal "100303" 3 times.(Úì¿üÿÿÿÿ
+?squid:S1148J"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+Xsquid:CallToDeprecatedMethod'"0Remove this use of "basePath"; it is deprecated.(Úºõ…
+vsquid:S2293ƒ"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÊßÃñÿÿÿÿÿ

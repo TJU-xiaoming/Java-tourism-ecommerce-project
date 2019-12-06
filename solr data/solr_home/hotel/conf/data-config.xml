@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>    
+<dataConfig>  
+ <dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver"    
+   url="jdbc:mysql://127.0.0.1:3306/itripdb"    
+   user="itrip"    
+   password="itripqaz!@#$QAZ"/>  
+   <document name="common">  
+   
+	<entity name="areaDic" pk="id" query="SELECT
+												table1.id AS id,
+												hotelName AS hotelName,
+												countryId AS countryId,
+												provinceId AS provinceId,
+												cityId AS cityId,
+												address AS address,
+												details AS details,
+												facilities AS facilities,
+												hotelPolicy AS hotelPolicy,
+												hotelType AS hotelType,
+												hotelLevel AS hotelLevel,
+												isGroupPurchase AS isGroupPurchase,
+												redundantCityName AS redundantCityName,
+												redundantProvinceName AS redundantProvinceName,
+												redundantCountryName AS redundantCountryName,
+												redundantHotelStore AS redundantHotelStore,
+												table1.creationDate AS creationDate,
+												table1.createdBy AS createdBy,
+												table1.modifyDate AS modifyDate,
+												table1.modifiedBy AS modifiedBy,
+												t4.maxPrice,
+												t4.minPrice,
+												CASE WHEN t6.score IS NULL THEN 5 ELSE t6.score END AS avgScore,
+												CASE WHEN t6.commentCount IS NULL THEN 0 ELSE t6.commentCount END AS commentCount,
+												CASE WHEN t6.isOkCount IS NULL THEN 0 ELSE t6.isOkCount END AS isOkCount,
+												t7.extendPropertyNames AS extendPropertyNames,
+												t7.extendPropertyPics AS extendPropertyPics,
+												CONCAT(
+													',',
+													CAST(t7.extendPropertyIds AS CHAR),
+													','
+												) AS extendPropertyIds,
+												CONCAT(
+													',',
+													CAST(t10.tradingAreaIds AS CHAR),
+													','
+												) AS tradingAreaIds,
+												t10.tradingAreaNames AS tradingAreaNames,
+												t11.imgUrl AS imgUrl,
+												CONCAT(
+													',',
+													CAST(t14.featureIds AS CHAR),
+													','
+												) AS featureIds,
+												t14.featureNames
+											FROM
+												itrip_hotel table1
+											LEFT JOIN (
+												SELECT
+													MAX(t3.roomPrice) AS maxPrice,
+													min(t3.roomPrice) AS minPrice,
+													hotelId AS hotelId
+												FROM
+													itrip_hotel_room t3
+												GROUP BY
+													hotelId
+											) AS t4 ON t4.hotelId = table1.id
+											LEFT JOIN (
+												SELECT
+													ROUND(AVG(t5.score), 1) AS score,
+													count(id) AS commentCount,
+													ROUND(sum(isOk) / count(id), 2) AS isOkCount,
+													t5.hotelId AS hotelId
+												FROM
+													itrip_comment t5
+												GROUP BY
+													t5.hotelId
+											) AS t6 ON table1.id = t6.hotelId
+											LEFT JOIN (
+												SELECT
+													GROUP_CONCAT(t1. NAME) AS extendPropertyNames,
+													GROUP_CONCAT(t2.extendPropertyId) AS extendPropertyIds,
+													GROUP_CONCAT(t1.pic) AS extendPropertyPics,
+													t2.hotelId AS hotelId
+												FROM
+													itrip_label_dic t1,
+													itrip_hotel_extend_property t2
+												WHERE
+													t1.id = t2.extendPropertyId
+												GROUP BY
+													t2.hotelId
+											) AS t7 ON table1.id = t7.hotelId
+											LEFT JOIN (
+												SELECT
+													GROUP_CONCAT(t8. NAME) AS tradingAreaNames,
+													GROUP_CONCAT(t9.areaId) AS tradingAreaIds,
+													t9.hotelId AS hotelId
+												FROM
+													itrip_area_dic t8,
+													itrip_hotel_trading_area t9
+												WHERE
+													t8.id = t9.areaId
+												GROUP BY
+													t9.hotelId
+											) AS t10 ON table1.id = t10.hotelId
+											LEFT JOIN itrip_image t11 ON table1.id = t11.targetId
+											AND t11.type = 0
+											AND t11.position = 1
+											LEFT JOIN (
+												SELECT
+													GROUP_CONCAT(t12. NAME) AS featureNames,
+													GROUP_CONCAT(t13.featureId) AS featureIds,
+													t13.hotelId AS hotelId
+												FROM
+													itrip_label_dic t12,
+													itrip_hotel_feature t13
+												WHERE
+													t12.id = t13.featureId
+												GROUP BY
+													t13.hotelId
+											) AS t14 ON table1.id = t14.hotelId"
+												
+											deltaImportQuery="SELECT
+																	table1.id AS id,
+																	hotelName AS hotelName,
+																	countryId AS countryId,
+																	provinceId AS provinceId,
+																	cityId AS cityId,
+																	address AS address,
+																	details AS details,
+																	facilities AS facilities,
+																	hotelPolicy AS hotelPolicy,
+																	hotelType AS hotelType,
+																	hotelLevel AS hotelLevel,
+																	isGroupPurchase AS isGroupPurchase,
+																	redundantCityName AS redundantCityName,
+																	redundantProvinceName AS redundantProvinceName,
+																	redundantCountryName AS redundantCountryName,
+																	redundantHotelStore AS redundantHotelStore,
+																	table1.creationDate AS creationDate,
+																	table1.createdBy AS createdBy,
+																	table1.modifyDate AS modifyDate,
+																	table1.modifiedBy AS modifiedBy,
+																	t4.maxPrice,
+																	t4.minPrice,
+																	CASE WHEN t6.score IS NULL THEN 5 ELSE t6.score END AS avgScore,
+																	CASE WHEN t6.commentCount IS NULL THEN 0 ELSE t6.commentCount END AS commentCount,
+																	CASE WHEN t6.isOkCount IS NULL THEN 0 ELSE t6.isOkCount END AS isOkCount,
+																	t7.extendPropertyNames AS extendPropertyNames,
+																	t7.extendPropertyPics AS extendPropertyPics,
+																	CONCAT(
+																		',',
+																		CAST(t7.extendPropertyIds AS CHAR),
+																		','
+																	) AS extendPropertyIds,
+																	CONCAT(
+																		',',
+																		CAST(t10.tradingAreaIds AS CHAR),
+																		','
+																	) AS tradingAreaIds,
+																	t10.tradingAreaNames AS tradingAreaNames,
+																	t11.imgUrl AS imgUrl,
+																	CONCAT(
+																		',',
+																		CAST(t14.featureIds AS CHAR),
+																		','
+																	) AS featureIds,
+																	t14.featureNames
+																FROM
+																	itrip_hotel table1
+																LEFT JOIN (
+																	SELECT
+																		MAX(t3.roomPrice) AS maxPrice,
+																		min(t3.roomPrice) AS minPrice,
+																		hotelId AS hotelId
+																	FROM
+																		itrip_hotel_room t3
+																	GROUP BY
+																		hotelId
+																) AS t4 ON t4.hotelId = table1.id
+																LEFT JOIN (
+																	SELECT
+																		ROUND(AVG(t5.score), 1) AS score,
+																		count(id) AS commentCount,
+																		ROUND(sum(isOk) / count(id), 2) AS isOkCount,
+																		t5.hotelId AS hotelId
+																	FROM
+																		itrip_comment t5
+																	GROUP BY
+																		t5.hotelId
+																) AS t6 ON table1.id = t6.hotelId
+																LEFT JOIN (
+																	SELECT
+																		GROUP_CONCAT(t1. NAME) AS extendPropertyNames,
+																		GROUP_CONCAT(t2.extendPropertyId) AS extendPropertyIds,
+																		GROUP_CONCAT(t1.pic) AS extendPropertyPics,
+																		t2.hotelId AS hotelId
+																	FROM
+																		itrip_label_dic t1,
+																		itrip_hotel_extend_property t2
+																	WHERE
+																		t1.id = t2.extendPropertyId
+																	GROUP BY
+																		t2.hotelId
+																) AS t7 ON table1.id = t7.hotelId
+																LEFT JOIN (
+																	SELECT
+																		GROUP_CONCAT(t8. NAME) AS tradingAreaNames,
+																		GROUP_CONCAT(t9.areaId) AS tradingAreaIds,
+																		t9.hotelId AS hotelId
+																	FROM
+																		itrip_area_dic t8,
+																		itrip_hotel_trading_area t9
+																	WHERE
+																		t8.id = t9.areaId
+																	GROUP BY
+																		t9.hotelId
+																) AS t10 ON table1.id = t10.hotelId
+																LEFT JOIN itrip_image t11 ON table1.id = t11.targetId
+																AND t11.type = 0
+																AND t11.position = 1
+																LEFT JOIN (
+																	SELECT
+																		GROUP_CONCAT(t12. NAME) AS featureNames,
+																		GROUP_CONCAT(t13.featureId) AS featureIds,
+																		t13.hotelId AS hotelId
+																	FROM
+																		itrip_label_dic t12,
+																		itrip_hotel_feature t13
+																	WHERE
+																		t12.id = t13.featureId
+																	GROUP BY
+																		t13.hotelId
+																) AS t14 ON table1.id = t14.hotelId where table1.id ='${dih.delta.id}'" 
+	  
+	  deltaQuery="SELECT id as id  FROM itrip_hotel table1 where modifyDate > '${dih.last_index_time}'">    
+	  
+          <field column="id" name="id" />    
+          <field column="hotelName" name="hotelName" />    
+          <field column="countryId" name="countryId" />
+		  <field column="provinceId" name="provinceId" />
+		  <field column="cityId" name="cityId" />
+		  <field column="details" name="details" />
+		  <field column="facilities" name="facilities" />
+		  <field column="hotelPolicy" name="hotelPolicy" />
+		  
+		  <field column="hotelType" name="hotelType" />
+		  <field column="hotelLevel" name="hotelLevel" />
+		  <field column="isGroupPurchase" name="isGroupPurchase" />
+		  <field column="address" name="address"/>
+		  
+		  <field column="avgScore" name="avgScore" />
+		  
+		  <field column="redundantCityName" name="redundantCityName" />
+		  <field column="redundantProvinceName" name="redundantProvinceName" />
+		  <field column="redundantCountryName" name="redundantCountryName" />
+		  <field column="redundantHotelStore" name="redundantHotelStore" />
+		  <field column="creationDate" name="creationDate" />
+		  <field column="createdBy" name="createdBy" />
+		  <field column="modifyDate" name="modifyDate" />
+		  <field column="modifiedBy" name="modifiedBy" />
+			
+
+		  <!--非酒店表字段-->			
+			  
+				  
+		  <field column="isOkCount" name="isOkCount" />
+		  <field column="commentCount" name="commentCount" />
+		  
+		  <field column="extendPropertyNames" name="extendPropertyNames" />
+		  <field column="extendPropertyIds" name="extendPropertyIds" />
+		  <field column="extendPropertyPics" name="extendPropertyPics" />
+		  
+		  <field column="minPrice" name="minPrice" />
+		  <field column="maxPrice" name="maxPrice" />
+		  
+		  <field column="tradingAreaIds" name="tradingAreaIds" />
+		  <field column="tradingAreaNames" name="tradingAreaNames" />
+		  		  
+		  <field column="imgUrl" name="imgUrl" />
+		  
+		  
+		  
+      </entity>
+	  
+ </document>   
+</dataConfig> 
